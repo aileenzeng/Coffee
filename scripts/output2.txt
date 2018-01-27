@@ -1,0 +1,9 @@
+--CASE 0
+Input string: hello
+Doubled: hellohello
+--CASE 1
+Input string: 123
+Doubled: 123123
+--CASE 2
+Input string: goodbye
+Doubled: goodbyegoodbye

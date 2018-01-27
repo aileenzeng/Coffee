@@ -14,7 +14,6 @@ do
     echo "${array[$count]}" | java ScannerTest >> output.txt    
     echo Test Case $count completed...    #prints out counter for array
 done
-echo
 echo --- Executing python script ---
 python3 coffee-check.py
 echo --- Terminating python script 
