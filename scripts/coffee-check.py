@@ -1,3 +1,8 @@
+import os
+# script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
+# rel_path = "2091/data.txt"
+# abs_file_path = os.path.join(script_dir, rel_path)
+
 """ this program is called by the coffee shell script to determine
     whether output/expected output files are the same. """
 class Answer:
@@ -6,25 +11,29 @@ class Answer:
         self.passed = passed
         self.response = response
 
-    def get_passed(self):
-        """ gets boolean """
-        return self.passed
-
-    def get_response(self):
-        """ gets string """
-        return self.response
-
 def main():
     """ tests whether two txt files are the same """
     answer_list = compare_files("expected-output.txt", "output.txt")
-    # TODO: print out all parts of answer from answer_list to check that it's working properly
-    
+
+    # Checks to see that all answers are entered in the answer_list correctly
+    # for answer in answer_list:
+    #     print(str(answer.passed))
+    #     print(answer.response)
 
 def compare_files(expected_file, out_file):
     """ takes two txt files, sees if contents are identical """
     answers = [] # creates an empty list of answers (booleans, temporarily)
-    expected_text = open(expected_file, "r")
-    out_text = open(out_file, "r")
+
+    # Gets access to the correct directories
+    script_path = os.path.abspath(__file__) # i.e. /path/to/dir/foobar.py
+    script_dir = os.path.split(script_path)[0] #i.e. /path/to/dir/
+    rel_ex_path = "expected-output-files/" + expected_file
+    rel_out_path = "user-output-files/" + out_file
+    abs_ex_path = os.path.join(script_dir, rel_ex_path)
+    abs_out_path = os.path.join(script_dir, rel_out_path)
+
+    expected_text = open(abs_ex_path, "r")
+    out_text = open(abs_out_path, "r")
 
     case_count = 0
 
@@ -34,19 +43,26 @@ def compare_files(expected_file, out_file):
         if "--CASE" in expected_line: # splits output file into cases
             # print("Hooray! Case: " + str(case_count))
             # TODO: Separate cases by --CASE string for multi-line outputs
-            expected_line = expected_text.readline()
+            expected_line = expected_text.readline().rstrip()
             #print(expected_line)
 
-            out_line = out_text.readline()
+            out_line = out_text.readline().rstrip()
             # print("In: " + expected_line + "Out: " + out_line)
-            answers.append(expected_line == out_line)
-            response = ""
-            if expected_line == out_line:
-                response = "Test case passed! \nOutput: " + expected_line
-            else:
-                response = "Test case failed! \nExpected output: " + expected_line + "\nActual output: " + out_line
 
-            answers.append(Answer(expected_line == out_line, response))
+            passed = (expected_line == out_line)
+            response = ""
+            if passed:
+                response = ("* Test case passed! \n*\n* Expected output:\n* " + expected_line 
+                            + "\n* \n* Actual Output:\n* " + out_line)
+            else:
+                response = ("* Test case failed! \n*\n* Expected output:\n* " + expected_line 
+                            + "\n* \n* Actual output:\n* " + out_line)
+            print("***")
+            print("* CASE " + str(case_count))
+            print(response)
+            print("***")
+            print()
+            answers.append(Answer(passed, response))
             """
             # Having major iteration troubles
             while "--CASE" not in expected_line:
@@ -54,7 +70,6 @@ def compare_files(expected_file, out_file):
                 expected_line = expected_text.readline() # new line
             """
             case_count += 1
-
     return answers
 
 if __name__ == "__main__":
