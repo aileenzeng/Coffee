@@ -1,10 +1,11 @@
-import os
-# script_dir = os.path.dirname(__file__) #<-- absolute dir the script is in
-# rel_path = "2091/data.txt"
-# abs_file_path = os.path.join(script_dir, rel_path)
-
 """ this program is called by the coffee shell script to determine
     whether output/expected output files are the same. """
+
+import os
+
+expected_output = "expected-output.txt"
+user_output = "output.txt"
+
 class Answer:
     """ stores boolean - whether a case was passed and a response message"""
     def __init__(self, passed, response):
@@ -13,7 +14,7 @@ class Answer:
 
 def main():
     """ tests whether two txt files are the same """
-    answer_list = compare_files("expected-output.txt", "output.txt")
+    answer_list = compare_files(expected_output, user_output)
 
     # Checks to see that all answers are entered in the answer_list correctly
     # for answer in answer_list:
