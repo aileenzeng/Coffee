@@ -2,8 +2,10 @@
     whether output/expected output files are the same. """
 
 import os
+import sys
 
-expected_output = "expected-output.txt"
+# expected_output = "expected-output.txt
+expected_output = sys.argv[1]
 user_output = "output.txt"
 
 class Answer:

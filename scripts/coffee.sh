@@ -1,8 +1,11 @@
 #!/bin/sh
 array=() # array of inputs (to be read from input file)
-java_file="ScannerTest"
-input_file="input.txt"
+
+# Reads in command line arguments for files
+java_file="$1"
+input_file="$1-input.txt"
 output_file="output.txt"
+expected_output="$1-eo.txt" 
 
 echo --- Executing coffee shell script ---
 echo --- Getting test cases... ---
@@ -36,6 +39,6 @@ mv $output_file ../user-output-files/$output_file
 
 echo --- Executing python script ---
 cd ../
-python3 coffee-check.py
+python3 coffee-check.py $expected_output
 echo --- Terminating python script 
 echo --- Terminating coffee shell script ---
