@@ -16,7 +16,7 @@ class Answer:
 
 def main():
     """ tests whether two txt files are the same """
-    answer_list = compare_files(expected_output, user_output)
+    compare_files(expected_output, user_output)
 
     # Checks to see that all answers are entered in the answer_list correctly
     # for answer in answer_list:
@@ -39,44 +39,65 @@ def compare_files(expected_file, out_file):
     out_text = open(abs_out_path)
 
     case_count = 0
+    expected_line = expected_text.readline()
+    out_line = out_text.readline()
 
-    for expected_line in expected_text:
-        out_line = out_text.readline()
+    exp_arr = []
+    out_arr = []
+    while len(expected_line) != 0:
+        # out_line = out_text.readline()
+        # print("Current line: " + expected_line)
         if "--CASE" in expected_line: # splits output file into cases
-            # print("Hooray! Case: " + str(case_count))
+            # print("New case starting! Line is: " + expected_line)
             expected_line = expected_text.readline().rstrip()
             out_line = out_text.readline().rstrip()
             passed = (expected_line == out_line)
-            while ("--CASE" not in expected_line or expected_line == ".") and passed:
+            # print("First expected line: " + expected_line)
+            count = 0
+            exp_arr.clear()
+            out_arr.clear()
+            # print("Condition 1: " + str("--CASE" not in expected_line))
+            # print("Condition 2: " + str(len(expected_line) != 0))
+            while "--CASE" not in expected_line and len(expected_line) != 0:
+                # print("Expected line is: " + expected_line)
+                # print("Condition 1: " + str("--CASE" not in expected_line))
+                # print("Condition 2: " + str(len(expected_line) != 0))
+                # print(len(expected_line) == 0)
+                # print("Line length: " + str(len(expected_line)))
+                # print("1. Expected line: " + expected_line)
+                exp_arr.append(expected_line)
+                out_arr.append(out_line)
                 expected_line = expected_text.readline().rstrip()
                 out_line = out_text.readline().rstrip()
+                # print("2. Expected line: " + expected_line)
+                # For testing purposes
+                count += 1
+                if count > 4:
+                    print("Break forced")
+                    break
                 passed = (expected_line == out_line)
-                # print("Next line is: " + expected_line)
-                if "--CASE" not in expected_line or expected_line == ".":
-                    break #yikes! don't like this, but it works?
+            # print("After while loop: " + expected_line)
             response = ""
             if passed:
-                response = ("* Test case passed! \n*\n* Expected output:\n* " + expected_line
-                            + "\n* \n* Actual Output:\n* " + out_line)
+                response = ("* Test case passed!")
             else:
-                response = ("* Test case failed! \n*\n* Expected output:\n* " + expected_line
-                            + "\n* \n* Actual output:\n* " + out_line)
+                response = ("* Test case failed!")
             print("***")
             print("* CASE " + str(case_count))
             print(response)
+            print("*\n* Your output: ")
+            print_array(out_arr)
+            print("*\n* Expected output: ")
+            print_array(exp_arr)
             print("***")
             print()
             answers.append(Answer(passed, response))
-
-            """
-            # Having major iteration troubles
-            while "--CASE" not in expected_line:
-                print(expected_line)
-                expected_line = expected_text.readline() # new line
-            """
             case_count += 1
     return answers
 
-
+def print_array(array):
+    """ Prints out contents of an array """
+    for line in array:
+        print("* " + line)
 if __name__ == "__main__":
     main()

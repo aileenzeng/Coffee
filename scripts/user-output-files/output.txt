@@ -10,3 +10,7 @@ third line
 Input string: hooray!
 Doubled: hooray!hooray!
 third line
+--CASE 3
+Input string: final
+Doubled: finalfinal
+third line
