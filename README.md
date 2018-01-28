@@ -30,29 +30,32 @@ $ bash --version
 $ cd scripts/
 ```
 
-Run coffee shell
+Run coffee shell 
 
 ```
-$ ./coffee.sh
+$ ./coffee.sh [java file name]
 ```
 
 ## Running the tests
-Unfortunately, the test files are hard coded into the coffee.sh. Modifying which files coffee.sh and coffee-check runs needs to run different tests needs be done manually for now (we're working on improving this!). All the file variables are currently at the top of our shell/python files.
+Run coffee shell, modify the command line argument as necessary.
+For example, to run the Java program ScannerTest.java, do:
+```
+$ ./coffee.sh ScannerTest
+```
 
-To modify which tests are run, make the following changes:
-
-- coffee.sh
+To create tests for a Java program, edit the input-files and expected-output files corresponding to the name of the Java file. For example, the appropriate test file for ScannerTest *must* adhere to the following naming and storage conventions:
 ```
-java_file="JAVA_FILE"               # Java file to be tested (no .java afterwards)
-input_file="INPUT_FILE.txt"         # Text case inputs Java file reads in
-output_file="OUTPUT_FILE.txt"       # Text file that logs Java console output for each case (same name as user_output)
+Coffee
+|- scripts
+    |- java-files
+        |- ScannerText.java
+    |- input-files
+        |- ScannerTest-input.txt
+    |- expected-output-files
+        |- ScannerTest-eo.txt
 ```
-- coffee-check.py
-```
-expected_output="EXPECTED_OUTPUT_FILE.txt"     # Text file containing expected solutions to test cases
-user_output = "OUTPUT.txt"                     # Text containing logs from Java console input (same name as output_file)
-```
-- Make sure that each file is located in the appropriate directory as well!
+- To add test cases, edit the appropriate input-files and expected-output text files.
+- Make sure that each file is located in the correct directory!
 ```
 java-files > Directory containing java files to be tested
 input-files > Directory containing txt files with tests for a java-file
