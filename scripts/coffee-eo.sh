@@ -1,10 +1,10 @@
 #!/bin/sh
-array=() # array of inputs (to be read from input file)
+# This script generates an expected output file (given a list of inputs)
+# Assumes that the java file that is submitted is correct
 
-# Reads in command line arguments for files
+array=() # array of inputs (to be read from input file)
 java_file="$1"
 input_file="$1-input.txt"
-output_file="output.txt"
 expected_output="$1-eo.txt" 
 
 echo --- Executing coffee shell script ---
@@ -22,22 +22,16 @@ done < "$input_file"
 echo --- Compiling java files... ---
 cd ../java-files
 javac $1.java    # compiles all java files into class files
-> $output_file    # Clears output file
+> $expected_output    # Clears expected output file
 
 count=0
 for input in "${array[@]}"
 do
     #pipes input from shell into java file 
-    echo "--CASE $count" >> $output_file
-    echo "$input" | java $java_file >> $output_file    
-    echo Test Case $count completed...    #prints out counter for array
+    echo "--CASE $count" >> $expected_output
+    echo "$input" | java $java_file >> $expected_output    
+    echo Test Case $count created...    #prints out counter for array
     let "count++"
 done
 
-mv $output_file ../user-output-files/$output_file
-
-echo --- Executing python script ---
-cd ../
-python3 coffee-check.py $expected_output
-echo --- Terminating python script 
-echo --- Terminating coffee shell script ---
+mv $expected_output ../expected-output-files/$expected_output

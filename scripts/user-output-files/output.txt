@@ -1,16 +1,2 @@
 --CASE 0
-Input string: this is a string
-Doubled: this is a stringthis is a string
-third line
---CASE 1
-Input string: output
-Doubled: outputoutput
-third line
---CASE 2
-Input string: hooray!
-Doubled: hooray!hooray!
-third line
---CASE 3
-Input string: final
-Doubled: finalfinal
-third line
+Hello World!
