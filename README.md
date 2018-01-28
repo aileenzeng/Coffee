@@ -69,15 +69,15 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/aileenzeng/Coffee/tags). 
 
 ## Authors
 
-* **Aileen Zeng** - *Initial work (Python/Bash)* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Aileen Zeng** - *Initial work (Python/Bash)* - [aileenzeng](https://github.com/aileenzeng)
 * **Frank Gonzalez Rojas** - *Initial work (HTML/CSS)* - [That1Handyman](https://github.com/That1Handyman)
 * **Lizeth Rogel** - *Initial work (PHP)* - [xlzth](https://github.com/xlzth)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/aileenzeng/Coffee/contributors) who participated in this project.
 
 ## License
 
