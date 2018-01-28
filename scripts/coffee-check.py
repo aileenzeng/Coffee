@@ -28,37 +28,38 @@ def compare_files(expected_file, out_file):
     answers = [] # creates an empty list of answers (booleans, temporarily)
 
     # Gets access to the correct directories
-    script_path = os.path.abspath(__file__) # i.e. /path/to/dir/foobar.py
-    script_dir = os.path.split(script_path)[0] #i.e. /path/to/dir/
+    # script_path =  # i.e. /path/to/dir/foobar.py
+    script_dir = os.path.split(os.path.abspath(__file__))[0] #i.e. /path/to/dir/
     rel_ex_path = "expected-output-files/" + expected_file
     rel_out_path = "user-output-files/" + out_file
     abs_ex_path = os.path.join(script_dir, rel_ex_path)
     abs_out_path = os.path.join(script_dir, rel_out_path)
 
-    expected_text = open(abs_ex_path, "r")
-    out_text = open(abs_out_path, "r")
+    expected_text = open(abs_ex_path)
+    out_text = open(abs_out_path)
 
     case_count = 0
 
     for expected_line in expected_text:
         out_line = out_text.readline()
-        # print("In: " + expected_file + " Out: " + out_line)
         if "--CASE" in expected_line: # splits output file into cases
             # print("Hooray! Case: " + str(case_count))
-            # TODO: Separate cases by --CASE string for multi-line outputs
             expected_line = expected_text.readline().rstrip()
-            #print(expected_line)
-
             out_line = out_text.readline().rstrip()
-            # print("In: " + expected_line + "Out: " + out_line)
-
             passed = (expected_line == out_line)
+            while ("--CASE" not in expected_line or expected_line == ".") and passed:
+                expected_line = expected_text.readline().rstrip()
+                out_line = out_text.readline().rstrip()
+                passed = (expected_line == out_line)
+                # print("Next line is: " + expected_line)
+                if "--CASE" not in expected_line or expected_line == ".":
+                    break #yikes! don't like this, but it works?
             response = ""
             if passed:
-                response = ("* Test case passed! \n*\n* Expected output:\n* " + expected_line 
+                response = ("* Test case passed! \n*\n* Expected output:\n* " + expected_line
                             + "\n* \n* Actual Output:\n* " + out_line)
             else:
-                response = ("* Test case failed! \n*\n* Expected output:\n* " + expected_line 
+                response = ("* Test case failed! \n*\n* Expected output:\n* " + expected_line
                             + "\n* \n* Actual output:\n* " + out_line)
             print("***")
             print("* CASE " + str(case_count))
@@ -66,6 +67,7 @@ def compare_files(expected_file, out_file):
             print("***")
             print()
             answers.append(Answer(passed, response))
+
             """
             # Having major iteration troubles
             while "--CASE" not in expected_line:
@@ -74,6 +76,7 @@ def compare_files(expected_file, out_file):
             """
             case_count += 1
     return answers
+
 
 if __name__ == "__main__":
     main()

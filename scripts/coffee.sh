@@ -21,7 +21,7 @@ do
 done < "$input_file"
 echo --- Compiling java files... ---
 cd ../java-files
-javac *.java    # compiles all java files into class files
+javac $1.java    # compiles all java files into class files
 > $output_file    # Clears output file
 
 count=0
