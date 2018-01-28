@@ -1,6 +1,7 @@
 # Coffee
 
 Coffee is an autograder for basic Java programs built with Shell/Python 3. This is our team's hack for BrickHack4 (2018).
+
 Currently, it only works for specific types of problems, but we are working to expand its capabilities!
 
 ## Getting Started
@@ -43,7 +44,9 @@ For example, to run the Java program ScannerTest.java, do:
 $ ./coffee.sh ScannerTest
 ```
 
-To create tests for a Java program, edit the input-files and expected-output files corresponding to the name of the Java file. For example, the appropriate test file for ScannerTest *must* adhere to the following naming and storage conventions:
+To create tests for a Java program, edit the input-files and expected-output files corresponding to the name of the Java file. 
+
+EX: The appropriate test files for ScannerTest *must* adhere to the following naming and storage conventions:
 ```
 Coffee
 |- scripts
@@ -54,8 +57,20 @@ Coffee
     |- expected-output-files
         |- ScannerTest-eo.txt
 ```
-- To add test cases, edit the appropriate input-files and expected-output text files.
-- Make sure that each file is located in the correct directory!
+To add test cases, edit the appropriate input-files and expected-output text files.
+
+Alternatively, you may find it helpful to use coffee-eo.sh to auto-generate your expected-output text files. You must have an input file already generated.
+
+Run:
+```
+$ ./coffee-eo.sh [java file name]
+```
+EX: To create the expected test file for ScannerTest2, run:
+```
+$ ./coffee-eo.sh ScannerTest2
+```
+
+Make sure that each file is located in the correct directory!
 ```
 java-files > Directory containing java files to be tested
 input-files > Directory containing txt files with tests for a java-file
