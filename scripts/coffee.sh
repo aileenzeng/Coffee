@@ -14,10 +14,20 @@ counter=0
 # fills array with input read in from input file
 while read -r line
 do
-    name="$line"
-    # echo "Name read from file - $name"
-    array[$counter]=$name
-    let "counter++"
+    if [[ "$line" =~ ^$ ]]; then
+        # echo "empty line"
+        echo Adding:
+        echo $name
+        # runs test case from array
+        array[$counter]=$name
+        let "counter++"
+        name=""
+        # run test on array
+    else
+        name=$name"$line\n"
+        # echo "Name read from file - $line"   
+    fi
+    array[$counter]=$name   # Adding in last test case
 done < "$input_file"
 echo --- Compiling java files... ---
 cd ../java-files

@@ -1,4 +1,7 @@
 this is a string
+
 output
+
 hooray!
+
 final
