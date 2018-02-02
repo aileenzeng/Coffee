@@ -5,7 +5,7 @@ import os
 import sys
 
 # expected_output = "expected-output.txt
-expected_output = sys.argv[1]
+expected_output = sys.argv[1]   # name of expected output file
 user_output = "output.txt"
 """
 class Answer:
@@ -31,6 +31,7 @@ def compare_files(expected_file, out_file):
     expected_text = open(abs_ex_path)
     out_text = open(abs_out_path)
 
+    correct = 0
     case_count = 0
     expected_line = expected_text.readline()
     out_line = out_text.readline()
@@ -55,10 +56,12 @@ def compare_files(expected_file, out_file):
             response = ""
             if passed:
                 response = ("* Test case passed!")
+                correct += 1
             else:
                 response = ("* Test case failed!")
             print_results(case_count, response, out_arr, exp_arr)
             case_count += 1
+    print ("(" + str(correct) + "/" + str(case_count) + ") test cases passed!")
 
 def print_array(array):
     """ Prints out contents of an array """

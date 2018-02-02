@@ -5,10 +5,9 @@ array=() # array of inputs (to be read from input file)
 # First argument: name of java test file
 # Second argument: name of java solution file
 java_test="$1"
-java_master="$2"
 input_file="$2-input.txt"
-output_file="output.txt"
 expected_output="$2-eo.txt" 
+output_file="output.txt"
 
 echo --- Executing coffee shell script ---
 echo --- Getting test cases... ---
@@ -17,10 +16,10 @@ counter=0
 # fills array with input read in from input file
 while read -r line
 do
-    if [[ "$line" =~ ^$ ]]; then
+    if [[ "$line" =~ ^$ ]]; then    #if line is empty
         # echo "empty line"
-        echo Adding:
-        echo $name
+        # echo Adding:
+        # echo $name
         # runs test case from array
         array[$counter]=$name
         let "counter++"
@@ -33,11 +32,10 @@ do
     array[$counter]=$name   # Adding in last test case
 done < "$input_file"
 echo --- Compiling java files... ---
-cd ../java-test/$java_master/    # gets into correct folder directory with test files
+cd ../java-test/$2/    # gets into correct folder directory with test files
 javac $java_test.java    # compiles java file into class file
 > $output_file    # Clears output file
 
-count=0
 for input in "${array[@]}"
 do
     #pipes input from shell into java file 
