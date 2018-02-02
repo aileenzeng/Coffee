@@ -3,7 +3,7 @@
 # Assumes that the java file that is submitted is correct
 
 array=() # array of inputs (to be read from input file)
-java_file="$1"
+java_master="$1"
 input_file="$1-input.txt"
 expected_output="$1-eo.txt" 
 
@@ -29,7 +29,7 @@ do
     array[$counter]=$name   # Adding in last test case
 done < "$input_file"
 echo --- Compiling java files... ---
-cd ../java-files
+cd ../java-master
 javac $1.java    # compiles all java files into class files
 > $expected_output    # Clears expected output file
 
@@ -38,7 +38,7 @@ for input in "${array[@]}"
 do
     #pipes input from shell into java file 
     echo "--CASE $count" >> $expected_output
-    echo "$input" | java $java_file >> $expected_output    
+    echo "$input" | java $java_master >> $expected_output    
     echo Test Case $count created...    #prints out counter for array
     let "count++"
 done
