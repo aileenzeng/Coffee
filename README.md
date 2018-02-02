@@ -2,8 +2,6 @@
 
 Coffee is an autograder for basic Java programs built with Shell/Python 3. This is our team's hack for BrickHack4 (2018).
 
-Currently, it only works for specific types of problems, but we are working to expand its capabilities!
-
 ## Getting Started
 
 - Clone git repository
@@ -34,14 +32,15 @@ $ cd scripts/
 Run coffee shell 
 
 ```
-$ ./coffee.sh [java file name]
+$ ./coffee.sh [java test file name] [java master file name]
 ```
 
 ## Running the tests
-Run coffee shell, modify the command line argument as necessary.
-For example, to run the Java program ScannerTest.java, do:
+Run coffee shell in command line. Coffee takes in two commands: the name of the file you want to check and the name of the file you want to test your file against.
+
+EX: To grade a program that printed out "Hello World!" to the console, first create a solution file. (In this example, the solution file will be called HelloWorld). If you would like to check the output of a "student-submitted file" called HeyWorld against the expected output of HelloWorld, you would run the following command:
 ```
-$ ./coffee.sh ScannerTest
+$ ./coffee.sh HeyWorld HelloWorld
 ```
 
 To create tests for a Java program, edit the input-files and expected-output files corresponding to the name of the Java file. 
@@ -50,12 +49,14 @@ EX: The appropriate test files for ScannerTest *must* adhere to the following na
 ```
 Coffee
 |- scripts
-    |- java-files
-        |- ScannerText.java
+    |- java-master
+        |- HelloWorld.java
+    |- java-test
+        |- HeyWorld.java
     |- input-files
-        |- ScannerTest-input.txt
+        |- HelloWorld-input.txt
     |- expected-output-files
-        |- ScannerTest-eo.txt
+        |- HelloWorld-eo.txt
 ```
 To add test cases, edit the appropriate input-files and expected-output text files.
 
