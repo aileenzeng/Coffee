@@ -1,6 +1,0 @@
---CASE 0
-Input string: hello
---CASE 1
-Input string: 123
---CASE 2
-Input string: goodbye

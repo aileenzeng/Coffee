@@ -1,0 +1,18 @@
+import java.util.Scanner;
+
+public class Problem1DemoRunner {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        int param1 = Integer.parseInt(s.nextLine());
+            int param2 = Integer.parseInt(s.nextLine());
+            int param3 = Integer.parseInt(s.nextLine());
+            Problem1Demo.printNums(param1, param2, param3);
+
+        // String s = args[0];
+        // System.out.println("First arg: " + s);
+        //int a = Integer.parseInt(args[0]);
+        //int b = Integer.parseInt(args[1]);
+        //int c = Integer.parseInt(args[2]);
+
+    }
+}
