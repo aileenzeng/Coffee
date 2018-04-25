@@ -10,8 +10,10 @@ java_runner="$1Runner"
 input_file="$2-input.txt"
 expected_output="$2-eo.txt" 
 output_file="output.txt"
-diff_file="$2-diff.txt"
+diff_file="$1-diff.txt"
+results_file="$1-results.txt"
 
+count=1
 echo --- Executing coffee shell script ---
 echo --- Getting test cases... ---
 cd input-files/
@@ -44,6 +46,7 @@ javac *.java            # compiles all java files into class file
 # java $java_runner       # runs the java class that runs everything else
 
 > $output_file    # Clears output file
+> $diff_file      # Clears diff file
 
 echo --- Running tests... ---
 array=("${array[@]:1}")     # removing first element from array because problems
@@ -61,4 +64,11 @@ rm *.class;
 
 echo --- Verifying Test Cases... ---
 diff output.txt expected-output.txt >> $diff_file
+cat $diff_file
+mv $diff_file ../../
+cd ../../
+# python3 coffee-out.py $diff_file $results_file
+
+
+mv $diff_file java-test/$2/
 echo --- Terminating coffee shell script ---

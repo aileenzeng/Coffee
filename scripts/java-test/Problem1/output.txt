@@ -1,8 +1,8 @@
-CASE 
+CASE 1
 a = 1
 b = 2
 c = 3
-CASE 1
+CASE 2
 a = 4
 b = 5
 c = 6
